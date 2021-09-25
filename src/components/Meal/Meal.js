@@ -8,33 +8,51 @@ import './Meal.css'
 const Meal = () => {
     const [mealDb, setMealDb] = useState([]);
     const [details, setDetails] = useState([]);
+    const [search, setSearch] = useState([]);
+    const [text, setText] = useState('');
     useEffect(() => {
-        fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+        fetch(url)
             .then(res => res.json())
-            .then(data => setMealDb(data.meals));
-    }, [])
+            .then(data => {
+                setMealDb(data.meals);
+                setSearch(data.meals);
+            });
+    }, [text])
 
     const handleDetails = (meal) => {
-        // console.log(id);
         setDetails(meal)
     }
+    const handleSearch = event => {
+        const searchText = event.target.value;
+        setText(searchText);
+        const matchedMeal = mealDb.filter(meal => meal.strMeal.toLowerCase().includes(text.toLowerCase()));
+        setSearch(matchedMeal);
+    }
+
     return (
-        <div className='meal'>
-            <div className='meal-container'>
+        <div className='meal-parent'>
+            <div className="search-container">
 
-                {
-                    mealDb.map(meal =>
-                        <MealDisplay
-                            key={meal.idMeal}
-                            meal={meal}
-                            handleDetails={handleDetails}
-                        ></MealDisplay>
-                    )
-                }
-
+                <input type="text" placeholder='search meal' onChange={handleSearch} />
             </div>
-            <div>
-                <Details details={details}></Details>
+
+            <div className='meal'>
+                <div className='meal-container'>
+
+                    {
+                        search.map(meal =>
+                            <MealDisplay
+                                key={meal.idMeal}
+                                meal={meal}
+                                handleDetails={handleDetails}
+                            ></MealDisplay>
+                        )
+                    }
+
+                    <Details details={details}></Details>
+                </div>
+
             </div>
         </div>
     );

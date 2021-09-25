@@ -1,7 +1,14 @@
 .meal-details {
-    background-color: rgb(250, 218, 114);
+    /* background-color: rgb(250, 218, 114); */
     padding: 20px;
 }
 .meal-details img {
     border-radius: 10px;
+}
+.close-btn{
+    padding: 5px 15px;
+    background-color: sandybrown;
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+    cursor: pointer;
 }
