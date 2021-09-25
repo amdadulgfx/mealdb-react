@@ -1,0 +1,20 @@
+.meal-display{
+    border-radius: 20px;
+    background-color: lightyellow;
+    padding: 20px;
+
+
+}
+.meal-display img{
+    /* background-color: lightyellow; */
+    /* padding: 20px; */
+    border-radius: 20px;
+    width: 300px;
+}
+.details-btn {
+    padding: 5px 15px;
+    background-color: sandybrown;
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+    cursor: pointer;
+}
